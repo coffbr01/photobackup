@@ -5,6 +5,12 @@ plugins {
 group = 'me.bcoffield'
 version = '1.0-SNAPSHOT'
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
+
 repositories {
     mavenCentral()
 }
@@ -31,4 +37,16 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+jar {
+    duplicatesStrategy = 'exclude'
+
+    manifest {
+        attributes "Main-Class": "me.bcoffield.photobackup.Main"
+    }
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }

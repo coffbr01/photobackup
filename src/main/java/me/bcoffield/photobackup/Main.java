@@ -34,6 +34,7 @@ public class Main {
                 s3Service.uploadAlbum(album);
             }
         });
+        log.info("Done!");
     }
 
     private String getRequiredEnvVar(String envVar) {
